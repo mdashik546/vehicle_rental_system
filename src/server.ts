@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import config from "./config";
 import initDB from "./config/db";
-import { singupRoutes } from "./auth/signup/signup.route";
-import { signinRoutes } from "./auth/signin/signin.route";
+import { singupRoutes } from "./modules/auth/signup/signup.route";
+import { signinRoutes } from "./modules/auth/signin/signin.route";
+import { vehicleRoutes } from "./modules/vehicle/vehicle.route";
 const app = express();
 const port = config.port;
 //body parser
@@ -14,10 +15,9 @@ initDB();
 app.use("/api/v1/auth/signup", singupRoutes);
 //signin
 app.use("/api/v1/auth/signin", signinRoutes);
+//vehicle
+app.use("/api/v1/vehicles",vehicleRoutes);
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
