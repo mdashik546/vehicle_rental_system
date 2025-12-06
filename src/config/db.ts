@@ -1,0 +1,20 @@
+import { Pool } from "pg";
+import config from ".";
+export const pool = new Pool({
+  connectionString: config.connect_str,
+});
+const initDB = async () => {
+  await pool.query(`
+        CREATE TABLE IF NOT EXISTS users(
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        password TEXT NOT NULL,
+        phone VARCHAR(15) NOT NULL,
+        role VARCHAR(20) NOT NULL,
+        create_at TIMESTAMP DEFAULT NOW(),
+        update_at TIMESTAMP DEFAULT NOW()
+        )
+        `);
+};
+export default initDB;
