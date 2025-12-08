@@ -3,7 +3,7 @@ import auth from "../../middleware/auth";
 import { userControllers } from "./user.controller";
 
 const router = Router();
-router.get("/", userControllers.getUser);
+router.get("/", auth("admin"), userControllers.getUser);
 router.get("/:userId", userControllers.singleUser);
 router.put("/:userId", auth(), userControllers.updateUser);
 router.delete("/:userId", auth(), userControllers.deleteUser);

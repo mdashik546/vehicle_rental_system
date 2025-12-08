@@ -2,7 +2,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
 import config from "../config";
 
-const auth = () => {
+const auth = (...roles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     const header = req.headers.authorization;
     if (!header || !header.startsWith("Bearer ")) {
@@ -16,8 +16,17 @@ const auth = () => {
         message: "You are not allowed",
       });
     }
-    const decoded = jwt.verify(token as string, config.secret as string);
-    req.user = decoded as JwtPayload;
+    const decoded = jwt.verify(
+      token as string,
+      config.secret as string
+    ) as JwtPayload;
+    req.user = decoded;
+    if (roles.length && !roles.includes(decoded.role as string)) {
+      return res.status(500).json({
+        error: "Unauthorized",
+      });
+    }
+    console.log(decoded);
     next();
   };
 };

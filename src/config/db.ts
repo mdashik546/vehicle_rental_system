@@ -30,5 +30,15 @@ const initDB = async () => {
          updated_at TIMESTAMP DEFAULT NOW()  
          )
           `);
+
+  await pool.query(`
+            CREATE TABLE IF NOT EXISTS bookings(
+            id SERIAL PRIMARY KEY,
+            customer_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            vehicle_id INT NOT NULL REFERENCES vehicles(id) ON DELETE CASCADE,
+            rent_start_date DATE,
+            rent_end_date DATE
+            )
+            `);
 };
 export default initDB;
