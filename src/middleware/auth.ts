@@ -10,9 +10,7 @@ const auth = () => {
           message: "You are not allowed",
         });
       }
-      console.log({ authToken: token });
       const decoded = jwt.verify(token as string, config.secret as string);
-      console.log("decoded", decoded);
       req.user = decoded as JwtPayload;
       next();
     } catch (error: any) {
