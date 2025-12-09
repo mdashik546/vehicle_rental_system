@@ -20,7 +20,6 @@ const initDB = async () => {
   await pool.query(`
          CREATE TABLE IF NOT EXISTS vehicles(
          id SERIAL PRIMARY KEY,
-         user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
          vehicle_name VARCHAR(100) NOT NULL,
          type TEXT,
          registration_number VARCHAR(100) UNIQUE NOT NULL,
@@ -37,7 +36,9 @@ const initDB = async () => {
             customer_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
             vehicle_id INT NOT NULL REFERENCES vehicles(id) ON DELETE CASCADE,
             rent_start_date DATE,
-            rent_end_date DATE
+            rent_end_date DATE,
+            total_price INT NOT NULL,
+            status VARCHAR(50)
             )
             `);
 };

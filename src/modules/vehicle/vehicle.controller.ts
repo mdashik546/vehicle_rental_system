@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { vehicleServices } from "./vehicle.service";
+import sendResponse from "../../sendResponse";
 
 const createVehicle = async (req: Request, res: Response) => {
   try {
@@ -20,17 +21,15 @@ const getVehicle = async (req: Request, res: Response) => {
   try {
     const result = await vehicleServices.getVehicle();
     if (result.rowCount === 0) {
-      res.status(200).json({
-        success: true,
-        message: "No vehicles found",
-        data: result.rows,
-      });
+      sendResponse(res, 200, true, "No vehicles found", result.rows);
     } else {
-      res.status(200).json({
-        success: true,
-        message: "Vehicles retrieved successfully",
-        data: result.rows,
-      });
+      sendResponse(
+        res,
+        200,
+        true,
+        "Vehicles retrieved successfully",
+        result.rows
+      );
     }
   } catch (err: any) {
     res.status(500).json({
@@ -45,17 +44,15 @@ const singleVehicle = async (req: Request, res: Response) => {
       req.params.vehicleId as string
     );
     if (result.rowCount === 0) {
-      res.status(200).json({
-        success: true,
-        message: "No vehicle found",
-        data: result.rows,
-      });
+      sendResponse(res, 200, true, "No vehicle found", result.rows);
     } else {
-      res.status(200).json({
-        success: true,
-        message: "Vehicle retrieved successfully",
-        data: result.rows,
-      });
+      sendResponse(
+        res,
+        200,
+        true,
+        "Vehicle retrieved successfully",
+        result.rows
+      );
     }
   } catch (err: any) {
     res.status(500).json({

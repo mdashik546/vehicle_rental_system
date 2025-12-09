@@ -3,7 +3,7 @@ import { vehicleControllers } from "./vehicle.controller";
 import auth from "../../middleware/auth";
 
 const router = Router();
-router.post("/", auth("admin"), vehicleControllers.createVehicle);
+router.post("/", auth(), vehicleControllers.createVehicle);
 router.get("/", vehicleControllers.getVehicle);
 router.get("/:vehicleId", vehicleControllers.singleVehicle);
 router.put("/:vehicleId", auth(), vehicleControllers.updateVehicle);

@@ -5,7 +5,7 @@ import { singupRoutes } from "./modules/auth/signup/signup.route";
 import { signinRoutes } from "./modules/auth/signin/signin.route";
 import { vehicleRoutes } from "./modules/vehicle/vehicle.route";
 import { userRoutes } from "./modules/user/user.route";
-import { bookingRoutes } from "./modules/bookings/booking.route";
+import { bookingRoutes } from "./modules/booking/booking.route";
 const app = express();
 const port = config.port;
 //body parser
