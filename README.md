@@ -8,6 +8,7 @@ PostgreSQL (database)
 bcrypt (password hashing)
 jsonwebtoken (JWT authentication)
 ---------------------------------
+
 Setup
 .env file add 
 PORT=8000
