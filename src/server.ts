@@ -23,7 +23,9 @@ app.use("/api/v1/vehicles", vehicleRoutes);
 app.use("/api/v1/users", userRoutes);
 //bookings
 app.use("/api/v1/bookings", bookingRoutes);
-
+app.get("/", (req: Request, res: Response) => {
+  res.send("hellow world");
+});
 app.use((req: Request, res: Response) => {
   res.status(404).json({
     success: false,
